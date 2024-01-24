@@ -12,9 +12,17 @@ services:
             - driver: nvidia
               count: all
               capabilities: [ gpu ]
+    networks:
+      - ollama-network
   nginx:
     image: nginx:latest
     ports:
       - "80:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d
+    networks:
+      - ollama-network
+
+networks:
+  ollama-network:
+    driver: bridge
